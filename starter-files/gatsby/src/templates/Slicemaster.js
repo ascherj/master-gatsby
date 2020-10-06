@@ -12,27 +12,27 @@ const SlicemasterStyles = styled.div`
 `;
 
 export default function SlicemasterPage({ data }) {
-  console.log('Query data:', data);
-  const { slicemaster } = data;
+  const { person } = data;
   return (
     <SlicemasterStyles>
-      <Img fluid={slicemaster.image.asset.fluid} alt={slicemaster.name} />
+      <Img fluid={person.image.asset.fluid} alt={person.name} />
       <div className="slicemaster-info">
-        <h2 className="mark">{slicemaster.name}</h2>
-        <p>{slicemaster.description}</p>
+        <h2 className="mark">{person.name}</h2>
+        <p>{person.description}</p>
       </div>
     </SlicemasterStyles>
   );
 }
 
 export const query = graphql`
-  query($name: String!) {
-    slicemaster: sanityPerson(name: { eq: $name }) {
+  query($slug: String!) {
+    person: sanityPerson(slug: { current: { eq: $slug } }) {
       name
+      id
       description
       image {
         asset {
-          fluid(maxHeight: 800) {
+          fluid(maxWidth: 1000, maxHeight: 750) {
             ...GatsbySanityImageFluid
           }
         }

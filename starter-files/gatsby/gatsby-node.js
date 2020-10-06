@@ -111,7 +111,7 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
       component: slicemasterTemplate,
       context: {
         name: slicemaster.name,
-        description: slicemaster.description,
+        slug: slicemaster.slug.current,
       },
     });
   });
